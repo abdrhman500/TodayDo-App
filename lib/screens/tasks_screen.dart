@@ -1,24 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:to_day_do/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:to_day_do/models/task_data.dart';
 import 'package:to_day_do/screens/add_task_screen.dart';
 import 'package:to_day_do/widgets/tasks_list.dart';
 
-class TasksScreen extends StatefulWidget {
+class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
 
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'Go Shopping', isDone: true),
-    Task(name: 'Write English Essay'),
-    Task(name: 'Fill Water'),
-    Task(name: 'Clean Bed room'),
-    Task(name: 'Study the Lister', isDone: true),
-    Task(name: 'Fix the Car'),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +41,7 @@ class _TasksScreenState extends State<TasksScreen> {
               height: 10.0,
             ),
             Text(
-              "${tasks.length} Tasks",
+              "${Provider.of<TaskData>(context).tasks.length} Tasks",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -70,7 +58,7 @@ class _TasksScreenState extends State<TasksScreen> {
                     Radius.circular(18.0),
                   ),
                 ),
-                child: TasksList(tasks),
+                child: TasksList(),
               ),
             ),
           ],
@@ -87,10 +75,10 @@ class _TasksScreenState extends State<TasksScreen> {
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: AddTaskScreen((newTaskTitle) {
-                  setState(() {
-                    tasks.add(Task(name: newTaskTitle));
-                    Navigator.pop(context);
-                  });
+                  // setState(() {
+                  //   tasks.add(Task(name: newTaskTitle));
+                  //   Navigator.pop(context);
+                  // });
                 }),
               ),
             ),
